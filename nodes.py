@@ -14,9 +14,9 @@ input_path = folder_paths.get_input_directory()
 rvc_out_path = os.path.join(out_path,"RVC")
 os.environ["weight_root"] = rvc_out_path
 os.environ["index_root"] = rvc_out_path
-os.environ["rmvpe_root"] = os.path.join(now_dir,"rvc","assets","rmvpe")
-os.environ["hubert_base"] = os.path.join(now_dir,"rvc","assets","hubert","hubert_base.pt")
-os.makedirs(os.path.join(now_dir,"rvc","assets", "weights"),exist_ok=True)
+os.environ["rmvpe_root"] = "/stable-diffusion-cache/models/VoiceConversionWebUI/rmvpe" if os.path.exists("/stable-diffusion-cache/models/VoiceConversionWebUI") else os.path.join(now_dir,"rvc","assets","rmvpe")
+os.environ["hubert_base"] = "/stable-diffusion-cache/models/VoiceConversionWebUI/hubert/hubert_base.pt" if os.path.exists("/stable-diffusion-cache/models/VoiceConversionWebUI") else os.path.join(now_dir,"rvc","assets","hubert","hubert_base.pt")
+os.makedirs(os.path.join(folder_paths.models_dir,"rvc","assets", "weights"),exist_ok=True)
 class RVC_Infer:
     @classmethod
     def INPUT_TYPES(s):
@@ -205,8 +205,8 @@ class RVC_Train:
         train1key(exp_dir1=exp_name,sr2=sr,if_f0_3=if_f0_3,trainset_dir4=trainset_dir,spk_id5=speaker_id,
                   np7=n_p,f0method8=f0_method,save_epoch10=save_epoch,total_epoch11=total_epoch,
                   batch_size12=batch_size,if_save_latest13=if_save_latest,
-                  pretrained_G14="assets/pretrained%s/%sG%s.pth" % (path_str, f0_str, sr),
-                  pretrained_D15="assets/pretrained%s/%sD%s.pth" % (path_str, f0_str, sr),
+                  pretrained_G14="/stable-diffusion-cache/models/VoiceConversionWebUI/pretrained%s/%sG%s.pth" % (path_str, f0_str, sr) if os.path.exists("/stable-diffusion-cache/models/VoiceConversionWebUI") else "assets/pretrained%s/%sG%s.pth" % (path_str, f0_str, sr),
+                  pretrained_D15="/stable-diffusion-cache/models/VoiceConversionWebUI/pretrained%s/%sD%s.pth" % (path_str, f0_str, sr) if os.path.exists("/stable-diffusion-cache/models/VoiceConversionWebUI") else "assets/pretrained%s/%sD%s.pth" % (path_str, f0_str, sr),
                   gpus16=gpus,if_cache_gpu17=if_cache_gpu,if_save_every_weights18=if_save_every_weights,
                   version19=version,gpus_rmvpe=gpus_rmvpe)
         weight_path = os.path.join(now_dir,"rvc","assets","weights",f"{exp_name}.pth")

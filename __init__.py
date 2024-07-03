@@ -26,14 +26,14 @@ if os.path.isfile("%s/users.pth" % (site_packages_root)):
     print("!!!RVC path was added to " + "%s/users.pth" % (site_packages_root) 
     + "\n if meet `No module` error,try `python main.py` again")
 
-model_path = os.path.join(now_dir,"rvc", "assets")
+# model_path = os.path.join(now_dir,"rvc", "assets")
 
-if not os.path.exists(os.path.join(model_path, "pretrained_v2")):
-    cmd = "python %s/download_models.py" % (now_dir)
-    p = Popen(cmd, shell=True, cwd=now_dir)
-    p.wait()
-else:
-    print("!!!RVC use cache models,make sure your 'assets' complete")
+# if not os.path.exists(os.path.join(model_path, "pretrained_v2")):
+#     cmd = "python %s/download_models.py" % (now_dir)
+#     p = Popen(cmd, shell=True, cwd=now_dir)
+#     p.wait()
+# else:
+#     print("!!!RVC use cache models,make sure your 'assets' complete")
 
 
 WEB_DIRECTORY = "./web"
